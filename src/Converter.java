@@ -1,5 +1,6 @@
 import javax.swing.JOptionPane;
 import java.util.Map;
+import java.util.Currency;
 import java.util.HashMap;
 
 public class Converter {
@@ -63,11 +64,21 @@ public class Converter {
             destination = JOptionPane.showOptionDialog(null, "Choose your destination currency", "Select Option", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, currencyOptions, currencyOptions[0]);
         }while(origin == destination);
 
-        float value = Float.parseFloat(JOptionPane.showInputDialog(null, "Value:"));
+        float value = getCurrencyValue();
 
         convertCurrency(currencyDict.get(currencyOptions[origin]), currencyDict.get(currencyOptions[destination]), value);
     
     
+    }
+
+    public static float getCurrencyValue(){
+        do{
+            try{
+                return Float.parseFloat(JOptionPane.showInputDialog(null, "Value:"));
+            } catch (Exception e){
+                JOptionPane.showMessageDialog(null, "Invalid value! Try again");
+            }
+        } while(true);
     }
 
     public static void convertCurrency(String origin, String destination, float value){
